@@ -9,6 +9,7 @@ import org.junit.*;
 
 import controllayer.*;
 import modellayer.*;
+import utility.*;
 
 public class TestAddPayment {
 	private ControlPayStation conPay;
@@ -16,34 +17,91 @@ public class TestAddPayment {
 	private ControlReceipt pr;
 	private PPayStation PStation;
 	private Coin coin;
-//	private PPrice currentPrice;
-//	private PReceipt PReceipt;
+	private PPrice pPrice;
+	private Validation valid;
+	//private PReceipt PReceipt;
 	
 	@Before
 	public void setup() throws Exception {
 		System.out.println("setup()");
 		conPay = new ControlPayStation();
 		conPrice = new ControlPrice();
-		PStation = new PPayStation(1, "test-123");
+		PStation = conPay.getStation();
+		pPrice = new PPrice();
 		//PReceipt = new PReceipt();
+	}
+		
+	@After
+	public void deup() throws Exception {
+		conPay.setReady();
 		
 	}
 	
-//	@Test
-//	public void addPayment() throws IllegalCoinException {
-//		int addPaymentCoin = 10;
-////		coin = new Coin(addPaymentCoin, coinCurrency, coinType);
-//		conPay.addPayment(addPaymentCoin, Currency.ValidCurrency.DKK, Currency.ValidCoinType.INTEGER);
-//		assertEquals(dd);
-//		assertTrue(dd);
-////		int expectedR = PStation.addAmount(coin, currentPrice); 
-//	}
-//	
-	@Test
-	public void testValidCoin() throws IllegalCoinException {
-		int paymentCoin = 20;
-		conPay.addPayment(paymentCoin, Currency.ValidCurrency.NOK, Currency.ValidCoinType.INTEGER);
-		coin = new Coin(paymentCoin, Currency.ValidCurrency.NOK, Currency.ValidCoinType.INTEGER)
-		assertEquals("Should display Invalid coin: ", coin, conPay.readDisplay());
-	}
+	 @Test
+	 public void testAddPaymentCENT() throws IllegalCoinException {
+	    System.out.println(new Object() {}.getClass().getEnclosingMethod().getName());
+	    //Arrange
+	    int coinValue = 5;
+	    Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.EURO;
+	    Currency.ValidCoinType coinType = Currency.ValidCoinType.FRACTION;
+	        
+	    int expAmount = coinValue;
+	        
+	    //Act
+	    conPay.addPayment(coinValue, coinCurrency, coinType);
+	        
+	    //Assert
+	    assertEquals(expAmount, PStation.getAmount(), 5);
+	    }		
+		
+	 @Test
+	 public void testAddPaymentOERE() throws IllegalCoinException {
+	    System.out.println(new Object() {}.getClass().getEnclosingMethod().getName());
+	    //Arrange
+	    int coinValue = 50;
+	    Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.DKK;
+	    Currency.ValidCoinType coinType = Currency.ValidCoinType.FRACTION;
+	        
+	    int expAmount = coinValue;
+	        
+	    //Act
+	    conPay.addPayment(coinValue, coinCurrency, coinType);
+	        
+	    //Assert
+	    assertEquals(expAmount, PStation.getAmount(), 50);
+	    }
+	 
+	 @Test
+	 public void testAddPaymentEURO() throws IllegalCoinException {
+	    System.out.println(new Object() {}.getClass().getEnclosingMethod().getName());
+	    //Arrange
+	    int coinValue = 1;
+	    Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.EURO;
+	    Currency.ValidCoinType coinType = Currency.ValidCoinType.INTEGER;
+	        
+	    int expAmount = coinValue;
+	        
+	    //Act
+	    conPay.addPayment(coinValue, coinCurrency, coinType);
+	        
+	    //Assert
+	    assertEquals(expAmount, PStation.getAmount(), 100);
+	    }
+	 
+	 @Test 
+	 public void testAddPaymentDKK() throws IllegalCoinException {
+	    System.out.println(new Object() {}.getClass().getEnclosingMethod().getName());
+	    //Arrange
+	    int coinValue = 20;
+	    Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.DKK;
+	    Currency.ValidCoinType coinType = Currency.ValidCoinType.INTEGER;
+	        
+	    int expAmount = coinValue;
+	        
+	    //Act
+	    conPay.addPayment(coinValue, coinCurrency, coinType);
+	        
+	    //Assert
+	    assertEquals(expAmount, PStation.getAmount(), 266.6666666666667);
+	    }
 }
