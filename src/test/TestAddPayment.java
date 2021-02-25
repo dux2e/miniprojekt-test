@@ -29,7 +29,10 @@ public class TestAddPayment {
 //	public void testAddPayment() throws IllegalCoinException {
 //		System.out.println(new Object() {}.getClass().getEnclosingMethod().getName());
 //		assertEquals(
-//				ps.addPayment(5, Currency.ValidCurrency.DKK, Currency.ValidCoinType.INTEGER));
+//				ps.addPayment(5, 
+//							Currency.ValidCurrency.DKK, 
+//							Currency.ValidCoinType.INTEGER),
+//				ps.readDisplay(), 120);
 //	}
 
 }
