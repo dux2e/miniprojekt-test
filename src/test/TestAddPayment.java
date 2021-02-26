@@ -51,7 +51,7 @@ public class TestAddPayment {
 	    conPay.addPayment(coinValue, coinCurrency, coinType);
 	        
 	    //Assert
-	    assertEquals(expAmount, PStation.getAmount(), 5);
+	    assertEquals(expAmount, PStation.getAmount(), 0);
 	    }		
 		
 	 @Test
@@ -62,13 +62,13 @@ public class TestAddPayment {
 	    Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.DKK;
 	    Currency.ValidCoinType coinType = Currency.ValidCoinType.FRACTION;
 	        
-	    int expAmount = coinValue;
+	    double expAmount = Double.valueOf(coinValue) / 7.5;
 	        
 	    //Act
 	    conPay.addPayment(coinValue, coinCurrency, coinType);
 	        
 	    //Assert
-	    assertEquals(expAmount, PStation.getAmount(), 50);
+	    assertEquals(expAmount, PStation.getAmount(), 0);
 	    }
 	 
 	 @Test
@@ -79,13 +79,13 @@ public class TestAddPayment {
 	    Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.EURO;
 	    Currency.ValidCoinType coinType = Currency.ValidCoinType.INTEGER;
 	        
-	    int expAmount = coinValue;
+	    int expAmount = coinValue * 100;
 	        
 	    //Act
 	    conPay.addPayment(coinValue, coinCurrency, coinType);
 	        
 	    //Assert
-	    assertEquals(expAmount, PStation.getAmount(), 100);
+	    assertEquals(expAmount, PStation.getAmount(), 0);
 	    }
 	 
 	 @Test 
@@ -96,12 +96,12 @@ public class TestAddPayment {
 	    Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.DKK;
 	    Currency.ValidCoinType coinType = Currency.ValidCoinType.INTEGER;
 	        
-	    int expAmount = coinValue;
+	    double expAmount = Double.valueOf(coinValue) / 7.5d * 100;
 	        
 	    //Act
 	    conPay.addPayment(coinValue, coinCurrency, coinType);
 	        
 	    //Assert
-	    assertEquals(expAmount, PStation.getAmount(), 266.6666666666667);
+	    assertEquals(expAmount, PStation.getAmount(), 0.000000000001);
 	    }
 }
