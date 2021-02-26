@@ -12,7 +12,7 @@ import modellayer.*;
 import utility.*;
 
 public class TestAddPayment {
-	private ControlPayStation conPay;
+	private ControlPayStation ps;
 	private ControlPrice conPrice;
 	private ControlReceipt pr;
 	private PPayStation PStation;
@@ -24,16 +24,16 @@ public class TestAddPayment {
 	@Before
 	public void setup() throws Exception {
 		System.out.println("setup()");
-		conPay = new ControlPayStation();
+		ps = new ControlPayStation();
 		conPrice = new ControlPrice();
-		PStation = conPay.getPayStation();
+		PStation = ps.getPayStation();
 		pPrice = new PPrice();
 		//PReceipt = new PReceipt();
 	}
 		
 	@After
 	public void deup() throws Exception {
-		conPay.setReady();
+		ps.setReady();
 		
 	}
 	
@@ -48,7 +48,7 @@ public class TestAddPayment {
 	    int expAmount = coinValue;
 	        
 	    //Act
-	    conPay.addPayment(coinValue, coinCurrency, coinType);
+	    ps.addPayment(coinValue, coinCurrency, coinType);
 	        
 	    //Assert
 	    assertEquals(expAmount, PStation.getAmount(), 0);
@@ -65,7 +65,7 @@ public class TestAddPayment {
 	    double expAmount = Double.valueOf(coinValue) / 7.5;
 	        
 	    //Act
-	    conPay.addPayment(coinValue, coinCurrency, coinType);
+	    ps.addPayment(coinValue, coinCurrency, coinType);
 	        
 	    //Assert
 	    assertEquals(expAmount, PStation.getAmount(), 0);
@@ -82,7 +82,7 @@ public class TestAddPayment {
 	    int expAmount = coinValue * 100;
 	        
 	    //Act
-	    conPay.addPayment(coinValue, coinCurrency, coinType);
+	    ps.addPayment(coinValue, coinCurrency, coinType);
 	        
 	    //Assert
 	    assertEquals(expAmount, PStation.getAmount(), 0);
@@ -99,7 +99,7 @@ public class TestAddPayment {
 	    double expAmount = Double.valueOf(coinValue) / 7.5d * 100;
 	        
 	    //Act
-	    conPay.addPayment(coinValue, coinCurrency, coinType);
+	    ps.addPayment(coinValue, coinCurrency, coinType);
 	        
 	    //Assert
 	    assertEquals(expAmount, PStation.getAmount(), 0.000000000001);
@@ -119,7 +119,7 @@ public class TestAddPayment {
 		int expAmount = coinValue;
 		
 		//Act
-		conPay.addPayment(coinValue, coinCurrency, coinType);
+		ps.addPayment(coinValue, coinCurrency, coinType);
 		
 		//Assert
 		assertEquals(expAmount, PStation.getAmount(), 0);
@@ -136,9 +136,59 @@ public class TestAddPayment {
 		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.DKK;
 		
 		//Act
-		conPay.addPayment(coinValue, coinCurrency, coinType);
+		ps.addPayment(coinValue, coinCurrency, coinType);
 		
 		//Assert
+		//Not needed in this case :):):):):)
+	}
+	
+	@Test (expected = IllegalCoinException.class)
+	public void testAddPaymentAdditionalInvalid() throws IllegalCoinException {
+		System.out.println(new Object() {}.getClass().getEnclosingMethod().getName());
+		//Arrange
+		int coinValue = 50 + 25;
+		Currency.ValidCoinType coinType = Currency.ValidCoinType.FRACTION;
+		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.DKK;
+		
+		//Act
+		ps.addPayment(coinValue, coinCurrency, coinType);
+		
+		//Assert
+		//Not needed in this case :):):):):)
+	}
+	
+	@Test
+	public void testAddPaymentCancel() throws IllegalCoinException {
+		System.out.println(new Object() {}.getClass().getEnclosingMethod().getName());
+		//Arrange
+		int coinValue = 50;
+		Currency.ValidCoinType coinType = Currency.ValidCoinType.FRACTION;
+		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.DKK;
+		int expAmount = 0;
+		
+		//Act
+		ps.addPayment(coinValue, coinCurrency, coinType);
+		ps.cancel();
+		
+		//Assert
+		assertEquals(expAmount, PStation.getAmount(), 0);
+		//Not needed in this case :):):):):)
+	}
+	
+	@Test 
+	public void testAddPaymentAdditionalDKKValid() throws IllegalCoinException {
+		System.out.println(new Object() {}.getClass().getEnclosingMethod().getName());
+		//Arrange
+		int coinValue = 10 + 10;
+		Currency.ValidCoinType coinType = Currency.ValidCoinType.INTEGER;
+		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.DKK;
+		double expAmount = 266.6666666666667;
+		
+		//Act
+		ps.addPayment(coinValue, coinCurrency, coinType);
+		
+		//Assert
+		assertEquals(expAmount, PStation.getAmount(), 0.000000000001);
 		//Not needed in this case :):):):):)
 	}
 }
