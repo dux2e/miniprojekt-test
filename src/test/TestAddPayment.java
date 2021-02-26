@@ -40,7 +40,7 @@ public class TestAddPayment {
 		cps.addPayment(coinValue, coinCurrency, coinType);
 		
 		//Assert
-		assertEquals(expAmount, pps.getAmount(), 5);
+		assertEquals(expAmount, pps.getAmount(), 0);
 	}
 	
 	//Test case for invalid amount inserted into the machine

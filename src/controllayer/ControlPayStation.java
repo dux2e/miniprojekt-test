@@ -83,7 +83,7 @@ public class ControlPayStation {
 	
 	//Added for the JUnit test
 	//testAddPaymentEUROCentValid()
-	//To make sure it's the same PPayStation as in the actula code
+	//To make sure it's the same PPayStation tested as the PPayStation in the controller
 	public PPayStation getPayStation() {
 		return this.payStation;
 	}
