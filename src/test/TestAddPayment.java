@@ -26,7 +26,7 @@ public class TestAddPayment {
 		System.out.println("setup()");
 		conPay = new ControlPayStation();
 		conPrice = new ControlPrice();
-		PStation = conPay.getStation();
+		PStation = conPay.getPayStation();
 		pPrice = new PPrice();
 		//PReceipt = new PReceipt();
 	}
@@ -119,10 +119,10 @@ public class TestAddPayment {
 		int expAmount = coinValue;
 		
 		//Act
-		cps.addPayment(coinValue, coinCurrency, coinType);
+		conPay.addPayment(coinValue, coinCurrency, coinType);
 		
 		//Assert
-		assertEquals(expAmount, pps.getAmount(), 0);
+		assertEquals(expAmount, PStation.getAmount(), 0);
 	}
 	
 	//Invalid case should be 0.25 DKK
@@ -136,7 +136,7 @@ public class TestAddPayment {
 		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.DKK;
 		
 		//Act
-		cps.addPayment(coinValue, coinCurrency, coinType);
+		conPay.addPayment(coinValue, coinCurrency, coinType);
 		
 		//Assert
 		//Not needed in this case :):):):):)

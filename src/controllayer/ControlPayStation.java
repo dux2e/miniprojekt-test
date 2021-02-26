@@ -80,17 +80,14 @@ public class ControlPayStation {
 	private void reset() {
 		payStation.setAmount(0);
 	}
+
 	
-	}
-		return this.payStation;
-	public PPayStation getPayStation() {
 	//To make sure it's the same PPayStation tested as the PPayStation in the controller
 	//testAddPaymentEUROCentValid()
 	//Added for the JUnit test
-	
-
-	
-
+	public PPayStation getPayStation() {
+		return this.payStation;
+	}
 	
 
 }
