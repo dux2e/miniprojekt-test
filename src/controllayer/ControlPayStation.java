@@ -8,7 +8,7 @@ import databaselayer.IDbPBuy;
 import databaselayer.DatabasePBuy;
 
 /**
- * Inspired by the book: Flexible, Reliable Software Henrik Bærbak Christensen:
+ * Inspired by the book: Flexible, Reliable Software Henrik Bï¿½rbak Christensen:
  * Flexible, Reliable Software. Taylor and Francis Group, LLC 2010
  */
 
@@ -81,9 +81,12 @@ public class ControlPayStation {
 		payStation.setAmount(0);
 	}
 	
-	public PPayStation getStation() {
-		return this.payStation;
 	}
+		return this.payStation;
+	public PPayStation getPayStation() {
+	//To make sure it's the same PPayStation tested as the PPayStation in the controller
+	//testAddPaymentEUROCentValid()
+	//Added for the JUnit test
 	
 
 	

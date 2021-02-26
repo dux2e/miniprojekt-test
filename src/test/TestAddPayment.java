@@ -104,4 +104,41 @@ public class TestAddPayment {
 	    //Assert
 	    assertEquals(expAmount, PStation.getAmount(), 0.000000000001);
 	    }
+
+	//Check if 5 cent inserted to macchine
+	//5 cent is added to paystation via getAmount() :)
+	//Valid case should be (in this specific case) 0.05 EURO
+	@Test
+	public void testAddPaymentEUROCentValid() throws IllegalCoinException {
+		System.out.println(new Object() {}.getClass().getEnclosingMethod().getName());
+		//Arrange
+		int coinValue = 5;
+		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.EURO;
+		Currency.ValidCoinType coinType = Currency.ValidCoinType.FRACTION;
+		
+		int expAmount = coinValue;
+		
+		//Act
+		cps.addPayment(coinValue, coinCurrency, coinType);
+		
+		//Assert
+		assertEquals(expAmount, pps.getAmount(), 0);
+	}
+	
+	//Invalid case should be 0.25 DKK
+	//Test case for invalid amount inserted into the machine
+	@Test (expected = IllegalCoinException.class)
+	public void testAddPaymentDKKOreInvalid() throws IllegalCoinException {
+		System.out.println(new Object() {}.getClass().getEnclosingMethod().getName());
+		//Arrange
+		int coinValue = 25;
+		Currency.ValidCoinType coinType = Currency.ValidCoinType.FRACTION;
+		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.DKK;
+		
+		//Act
+		cps.addPayment(coinValue, coinCurrency, coinType);
+		
+		//Assert
+		//Not needed in this case :):):):):)
+	}
 }
