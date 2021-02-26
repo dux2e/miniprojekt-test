@@ -59,7 +59,7 @@ public class ControlPayStation {
 		reset();	
 		PReceipt buyReceipt = ctrlReceipt.getParkingReceipt();		
 		return buyReceipt;
-	}
+	} 
 
 	/**
 	 * Calculate the corresponding parking time in minutes
@@ -81,7 +81,9 @@ public class ControlPayStation {
 		payStation.setAmount(0);
 	}
 	
-
+	public PPayStation getStation() {
+		return this.payStation;
+	}
 	
 
 	
